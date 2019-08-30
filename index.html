@@ -1,0 +1,252 @@
+<!doctype html><!--网页文档头部文档声明 doc=document(文档)，type(类型)-->
+<html><!--主体开始-->
+	<!--网页头部区域-->
+	<head>
+		<!--声明当前页面的编码集charset=utf-8,中文编码集(gbk,gb2312),国际编码集(utf-8)-->
+		<meta charset="utf-8" /><!--元信息标签 声明编码集-->
+		<!--声明当前页面文档三要素-->
+		<!--标题-->
+		<title>纯Css3D轮播图小案例-凡事</title>
+		<!--关键字-->
+		<meta name="Keywords" content="web前端" />
+		<!--描述-->
+		<meta name="Description" content="一定要把Web前端学好学出色" />
+
+		<!--base,link,style,script-->
+		<style type="text/css">
+			html,body,div,ul,li,a,img{margin:0px;padding:0px;}
+			ul li{list-style:none;}
+			img{display:block;border:none;}
+			/*banner-style*/
+			.banner{
+				width:989px;
+				height:410px;
+				margin:150px auto 0;
+				position:relative;/*相对定位 定位参照范围*/
+			}
+			/*but-style*/
+			.but img{
+				width:45px;
+				height:45px;
+				position:absolute;
+				top:50%;
+				margin-top:-23px;
+				z-index:20;
+			}
+			.but .perv{left:0;}
+			.but .next{right:0;}
+
+			/*Css模拟3D效果*/
+			/*通过定位 绝对定位具体位置，把所有图片元素固定到某个区块使重叠*/
+			.banner ul li{position:absolute;}
+			/*通过百分比让图片宽高自适应*/
+			.banner ul li img{width:100%;height:100%;}
+
+
+			/*中间—显示区域板块图片样式*/
+			.banner ul li.cen{
+				width:640px;
+				height:270px;
+				z-index:15;
+				/*通过方向值确认中间图片区域*/
+				top:70px;
+				left:170px;
+			}
+			/*左边、右边-切换区域板块*/
+			.banner ul li.yvbei{
+				width:540px;
+				height:230px;
+				z-index:10;
+				top:90px;
+			}
+			.banner ul li.left{left:0px;}
+			.banner ul li.right{left:450px}
+			/*最底部还预留内容切换板块*/
+			.banner ul li.con{
+				width:540px;
+				height:230px;
+				top:90px;
+				left:224px;;
+			}
+		</style>
+	</head>
+
+	<!--网页身体区域-->
+	<body>
+		<!--
+			一、在脑海中先思考所学标签知识点，构思 小案例效果布局所需要标签
+			纯Css-3D布局思路：
+				图片：四个板块 
+						左边、右边-切换区域板块
+						中间—显示区域板块
+						最底部还预留内容切换板块
+		-->
+		<!--轮播图区域 开始-->
+		<div class="banner">
+			<!--按钮图片-->
+			<div class="but">
+				<img src="img/left.jpg" width="45" height="45" alt="上一张"
+				class="prev" />
+				<img src="img/right.jpg" width="45" height="45" alt="下一张"
+				class="next" />
+			</div>
+			<!--图片内容-->
+			<ul>
+				<!--
+					图片板块区分：10张图片
+						1、左右预备区域 2张图
+						2、中间显示区域 1张图
+						3、切换区域  7张图
+				-->
+				<!--中间显示区域-->
+				<li class="cen"><img src="img/1.jpg" /></li>
+				<!--右边切换区域-->
+				<li class="yvbei left"><img src="img/2.jpg" /></li>
+				<!--底部切换图片-->
+				<li class="con"><img src="img/3.jpg" /></li>
+				<li class="con"><img src="img/4.jpg" /></li>
+				<li class="con"><img src="img/5.jpg" /></li>
+				<li class="con"><img src="img/6.jpg" /></li>
+				<li class="con"><img src="img/7.jpg" /></li>
+				<li class="con"><img src="img/8.jpg" /></li>
+				<li class="con"><img src="img/9.jpg" /></li>
+				<!--左边切换区域-->
+				<li class="yvbei right"><img src="img/10.jpg" /></li>
+			</ul>
+		</div>
+		<!--轮播图区域 结束-->
+
+
+		<!--引用官网Jquery类库文件-API接口-->
+		<script type="text/javascript" src="jquery-2.2.4.min.js"></script>
+		<script>
+			/*创建序列号*/
+			/*	创建元素序列号 
+				假设邮局拿包裹通过编号获取
+				元素群组单独获取某个元素 可以通过序列号获取
+			*/
+			var _index = 0;
+			/*
+				创建时间变量
+				假设当前邮局关门，不好意思隔天来拿包裹
+			*/
+			var time = 0;
+			var z = 0;//图片张数
+			
+			/*
+				创建容器/包裹小隔间 
+					存放3D轮播图图片属性样式 （包裹）
+					宽度高度（收件人）/定位位置（电话号码）
+				Js/Jquery 容器：数组arr["数据1","数据2","数据3"];
+				arrWidth    =      [img-object_width]:图片宽度容器
+				容器名字   赋值       容器数据
+			*/
+			var arrWidth = [];//图片宽度容器
+			var arrHeight = [];//图片高度容器
+			var arrTop = [];//图片定位顶部位置
+			var arrLeft = [];//图片定位左边位置
+			var arrZindex = [];//图片显示层级关系
+
+			/*获取li对象个数*/
+			/*
+				$(".banner ul li"):查找文档里面li元素
+				.length:返回查找元素个数
+			*/
+			var len = $(".banner ul li").length;
+			/*获取li操作对象*/
+			var obj = $(".banner ul li");
+			/*调用本地时间 作为用户点击按钮时间判断条件*/
+			time = new Date();
+			
+
+			/*通过Jquery给点击按钮设定点击事件触发相应函数构造*/
+			//左按钮
+			$(".prev").click(function(){
+				//console.log("上一张");
+				if(new Date() -time>500){
+					flash(0);
+				}
+				time = new Date();
+			});
+			//右按钮
+			$(".next").click(function(){
+				//console.log("下一张");
+				if(new Date() -time>500){
+					flash(1);
+				}
+				time = new Date();
+			});
+
+			//简单封装轮播模块
+			function flash(but){//but参数判断左右切换按钮
+				/*第一步：
+				获取所有图片宽度高度、位置 进行数据赋值相应容器当中
+				*/
+				/*for()：循环事件 (循环条件)
+					(var i=0;i<len.length;i++)条件
+					var i=0：循环起点
+					i<len; 循环范围 小于某个结束点
+					i++ 叠加 本身+1 0+1 1+1 2+1
+
+					if for
+					if(a){c};条件判断  某个点是否符合，符合执行里面相应函数
+					a=判断条件 a == b; 条件满足 执行c
+					for(a,b,c){d};循环条件 
+					a:循环初始位置
+					b:循环范围
+					c：循环执行
+				
+				*/	
+				for(var i=0;i<len;i++){
+					/*宽度*/
+					/*
+						arrWidth [i]:通过当前编号赋值容器
+						.css();返回元素样式
+						通过编号找到对象使用.Css()获取该对象样式 赋值给左边容器
+					*/
+					arrWidth [i] = obj.eq(i).css("width");
+					arrHeight [i] = obj.eq(i).css("height");
+					arrTop [i] = obj.eq(i).css("top");
+					arrLeft [i] = obj.eq(i).css("left");
+					arrZindex [i] = obj.eq(i).css("z-index");
+				}
+				/*判断用户当前左切换 右切换*/
+				for(var i=0;i<len;i++){//通过循环找到所有图片
+					//通过按钮序列号判断当前按钮为左/右？
+					if(but==0){//左按钮
+						//当点击按钮切换考虑图片范围
+						if(i==0){//默认第一张
+							z = 9;//现在切换强制返回最后一张	
+						}else{
+							z = i-1 ;//不是默认第一张，正常执行上一张
+						}
+					}
+					if(but==1){//右按钮
+						if(i==9){//默认最后一张
+							z = 0//强制返回第一张
+						}else{
+							z = i+1;
+						}
+					}
+
+					//把获取宽度、高度、位置动态赋值
+					/*	
+						obj.eq(i):当前图片
+						.css();设定
+						css({"z-index":arrZindex [z]});
+							  左边    =  右边
+					*/
+					obj.eq(i).css({"z-index":arrZindex[z]});
+					/*通过Jqury.aniamte设定自定义动画 动画修改宽度高度 位置*/
+					obj.eq(i).animate({
+						"width":arrWidth[z],
+						"height":arrHeight[z],
+						"left":arrLeft[z],
+						"top":arrTop[z]
+					},500);
+				}
+				
+			}
+		</script>
+	</body>
+</html><!--主体结束-->
