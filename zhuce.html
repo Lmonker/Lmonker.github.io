@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<meta name="Author" content="W201603109-马虎的克莱尔">
+		<meta name="Keywords" content="">
+		<meta name="Description" content="">
+		<style type='text/css'>
+			html,body,div{margin:0px;padding:0px;}
+			#box{
+				position:absolute;
+				width:800px;
+				height:800px;
+				left:50%;
+				top:50%;
+				margin-left:-300px;
+				margin-top:-200px;
+				font-size:14px;
+				/* border:1px solid red; */
+			}
+			#box .txt{
+				width:800px;
+				height:50px;
+			}
+			#box .txt .word,#box .txt .ipt{
+				/* border:1px solid red;   */
+				float:left;
+				font-size:14px;
+				font-family:'微软雅黑';
+				line-height:50px;
+			}
+			#box .txt .word{
+				width:200px;
+				text-align:right;
+				padding-right:10px;
+			}
+			#box .txt .ipt{
+				width:500px;
+				text-align:left;
+				padding-left:5px;
+				color:red;
+			}
+			#box .print,#box .p2{display:inline-block;}
+			#box .print{
+				height:35px;
+				width:200px;
+				padding-left:10px;				
+			}
+			#box .print2{
+				height:35px;
+				width:69px;
+				padding-left:5px;
+			}
+			#box .sign{
+				width:635px;
+				height:50px;
+				float:left;
+				/* border:1px solid red; */
+				text-align:center;
+			} 
+		</style>
+		<title>Document</title>
+		</head>
+	<body>
+		<div id='box'>
+			<form action='https://www.baidu.com/' method='get'>
+				<div class='txt'>
+					<div class='word'>用户名</div>
+					<div class='ipt'>
+						<input id='name' class='print' type='text' name='user_name' value='' required='required' placeholder='请输入用户名' title='(用户名不可以为空)' maxlength='12'min='6'/>
+						<div class='p2'></div>
+					</div>
+					
+				</div>
+				<div class='txt'>
+					<div class='word'>密码</div>
+					<div class='ipt'>
+						<input class='print' type='password' name='user_password' value=''required='required' placeholder='请输入密码' title='(请输入密码)' maxlength='16' min='6' />
+						<div class='p2'></div>
+					</div>
+				</div>
+				<div class='txt'>
+					<div class='word'>确认密码</div>
+					<div class='ipt'>
+						<input class='print' type='password' name='user_password2' value=''required='required' placeholder='请再次输入密码' title='(请再次输入密码)' maxlength='16' min='6'/>
+						<div class='p2'></div>
+					</div>
+				</div>
+				<div class='txt'>
+					<div class='word'>性别</div>
+					<div class='ipt'>
+						<input type='radio' name='sex' value='男' checked/><span style='color:#000'>男</span>
+						<input type='radio' name='sex' value='女'/><span style='color:#000'>女</span>
+					</div>
+				</div>
+				<div class='txt'>
+					<div class='word'>生日</div>
+					<div class='ipt'>
+						<input class='print' type='date' name='Date' value=''required='required' title='请选择生日'/>
+					</div>
+				</div>
+				<div class='txt'>
+					<div class='word'>所在地</div>
+					<div class='ipt'>
+						<select class='print2' type='text' name='adress'value=''>
+							<option>中国</option>	
+						</select>
+						<select class='print2' type='text' name='adress'value=''>
+							<option>河南</option>	
+						</select>
+						<select class='print2' type='text' name='adress'value=''>
+							<option>郑州</option>
+							<option>开封</option>	
+							<option>洛阳</option>	
+							<option>平顶山</option>
+							<option>安阳</option>	
+							<option>鹤壁</option>	
+							<option>新乡</option>							
+						</select>
+					</div>
+				</div>
+				<div class='txt'>
+					<div class='word'>手机号码</div>
+					<div class='ipt'>
+						<input class='print' type='tel' name='phone' value=''required='required' placeholder='请输入手机号码' title='(请输入正确格式)' min='10000000000' max='19999999999'/>
+						<div class='p2'></div>
+					</div>
+				</div>
+				<div class='txt'>
+					<div class='word'>邮箱</div>
+					<div class='ipt'>
+						<input class='print' type='email' name='E-mail' value=''required='required' placeholder='请输入邮箱' title='(请输入邮箱)'/>
+						<div class='p2'></div>
+					</div>
+				</div>
+				<div class='txt'>
+					<div class='sign'>
+						<input class='print' type='submit' name='wd' value='点击注册'/>
+					</div>
+				</div>
+			</form>
+			<script>
+				var oPrint=document.getElementsByClassName('print');
+				var oP2=document.getElementsByClassName('p2');
+				var regName = /^\w{1,24}$/;
+				var regPword = /^\w{6,12}$/;
+				var regPword2 = /^\w{6,12}$/;
+				var regMail = /^\w+@[0-9a-zA-Z]{2,}(\.[a-zA-Z]{2,}){1,2}$/;
+				var regTel = /^1[34578]\d{9}$/;
+				oPrint[0].onblur = function(){
+					var val = this.value;
+					if(val=='')
+					{	
+						oP2[0].style.color='red';
+						oP2[0].innerHTML='请输入用户名';
+					}
+					if ( val.length )
+					{
+						if ( regName.test( val ) )
+						{
+							oP2[0].style.color='#00ff40';
+							oP2[0].innerHTML='输入格式正确';							
+						}
+						else
+						{
+							oP2[0].style.color='red';
+							oP2[0].innerHTML='输入格式不正确';
+						}
+						 
+					}
+				}
+				oPrint[1].onblur = function(){
+					var val = this.value;
+					if(val=='')
+					{	
+						oP2[1].style.color='red';
+						oP2[1].innerHTML='请输入密码';
+					}
+					if ( val.length )
+					{
+						if ( regPword.test( val ) )
+						{
+							oP2[1].style.color='#00ff40';
+							oP2[1].innerHTML='输入格式正确';							
+						}
+						else
+						{
+							oP2[1].style.color='red';
+							oP2[1].innerHTML='输入格式不正确';
+						}
+						 
+					}
+				}
+				oPrint[2].onblur = function(){
+					var val = this.value;
+					if(val=='')
+					{	
+						oP2[2].style.color='red';
+						oP2[2].innerHTML='请输入密码';
+					}
+					if ( val.length )
+					{
+						
+						if ( regPword2.test( val ) )
+						{
+							if (val!=oPrint[1].value)
+							{
+								oP2[2].style.color='red';
+								oP2[2].innerHTML='密码不一致';
+							}
+							else{
+								oP2[2].style.color='#00ff40';
+								oP2[2].innerHTML='输入格式正确';	
+							}
+						}
+						else
+						{
+							oP2[2].style.color='red';
+							oP2[2].innerHTML='输入格式不正确';
+						}
+						 
+					}
+				}
+				oPrint[4].onblur = function(){
+					var val = this.value;
+					if(val=='')
+					{	
+						oP2[3].style.color='red';
+						oP2[3].innerHTML='请输入手机号';
+					}
+					if ( val.length )
+					{
+						if ( regTel.test( val ) )
+						{
+							oP2[3].style.color='#00ff40';
+							oP2[3].innerHTML='输入格式正确';							
+						}
+						else
+						{
+							oP2[3].style.color='red';
+							oP2[3].innerHTML='输入格式不正确';
+						}
+						 
+					}
+				}
+				oPrint[5].onblur = function(){
+					var val = this.value;
+					if(val=='')
+					{	
+						oP2[4].style.color='red';
+						oP2[4].innerHTML='请输入邮箱';
+					}
+					if ( val.length )
+					{
+						if ( regMail.test( val ) )
+						{
+							oP2[4].style.color='#00ff40';
+							oP2[4].innerHTML='输入格式正确';							
+						}
+						else
+						{
+							oP2[4].style.color='red';
+							oP2[4].innerHTML='输入格式不正确';
+						}						 
+					}
+				}
+			</script>
+		</div>
+	</body>
+</html>
