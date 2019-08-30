@@ -1,37 +1,186 @@
-## Welcome to GitHub Pages
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>canvas——时钟</title>
+        <meta charset="utf-8">
+        <style type="text/css" media="screen">
+            body{background:url('https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1567157203&di=0f23c7fb6d408813229c4793c801dbc9&src=http://img.zcool.cn/community/03839555742a6c932f875b70fb894f0.jpg') center top no-repeat;}
+            div{width:500px;height:500px;margin:10px auto;}
+        </style>
+    </head>
+    <body>
+    <div>
+        <canvas id="can" width="500px" height="500px">您的浏览器不支持canvas</canvas>
+    </div>
+    <script type="text/javascript">
 
-You can use the [editor on GitHub](https://github.com/Lmonker/Lmonker.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+        var can=document.getElementById('can').getContext("2d");
+            function click(){
+                can.clearRect(0,0,500,500);
+        can.strokeStyle='#ff0';
+        can.fillStyle='rgba(0,0,0,0.7)';
+        can.lineWidth='10';
+        can.beginPath();
+        can.arc(250,250,200,0,360,false);//圆心坐标  半径  0度-360度  逆时针
+        can.closePath();
+        can.stroke();                    //触笔画法
+        can.fill();
 
-### Markdown
+        
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+        for(var i=0;i<12;i++){
+            can.save();
+            can.strokeStyle='#6f5';
+            can.lineWidth='7';
+            can.translate(250, 250);
+            can.rotate(30*i*Math.PI/180);
+            can.beginPath();
+            can.moveTo(0, -180);
+            can.lineTo(0, -195);
+            can.closePath();
+            can.stroke();
+            can.restore();
+        };
 
-```markdown
-Syntax highlighted code block
+        for(var i=0;i<60;i++){
+            can.save();
+            can.strokeStyle='#6f5';
+            can.lineWidth='7';
+            can.translate(250, 250);
+            can.rotate(6*i*Math.PI/180);
+            can.beginPath();
+            can.moveTo(0, -190);
+            can.lineTo(0, -195);
+            can.closePath();
+            can.stroke();
+            can.restore();
+        };
 
-# Header 1
-## Header 2
-### Header 3
+        for(var j=0;j<12;j++){
+        	can.save();
+        	can.font='50px 宋体';
+        	can.fillStyle='#fff';
+        	can.translate(250,250);
+        	j<9?can.rotate(30*(j+1)*Math.PI/180):can.rotate(29.7*(j+1)*Math.PI/180);
+        	can.fillText(j+1,-15,-130);
+        	can.restore();
+        }
 
-- Bulleted
-- List
+                           //清除圆形区域的图形函数；
+            var nowTime=new Date();
+            var second=nowTime.getSeconds();
+            var minute=nowTime.getMinutes();
+            var hour=nowTime.getHours();
+            hour+=minute/60;
+            minute+=second/60;
 
-1. Numbered
-2. List
+            can.save();
+            can.font='40px 宋体';
+            can.fillStyle='#fff';
+            can.shadowOffsetX=2;
+            can.shadowOffsetY=2;
+            can.shadowBlur=5;
+            can.shadowColor='#fff';
+            can.textBaseline='top';
+            if(hour>=6&&hour<12){
+                can.fillText('Good morning！',100,0);
+            }else
+            if(hour>=12&&hour<18){
+                can.fillText('Good afternoon！',100,0);
+            }else
+            if(hour>=18&&hour<23){
+                can.fillText('Good evening！',100,0);
+            }else{
+                can.fillText('该睡觉啦！',150,0);
+            }
+            can.restore();
 
-**Bold** and _Italic_ and `Code` text
+            can.save();
+            can.strokeStyle='#fff';
+            can.lineWidth='7';
+            can.lineJoin='round';
+            can.translate(250, 250);
+            can.rotate(hour*30*Math.PI/180);
+            can.beginPath();
+            can.moveTo(0, 10);
+            can.lineTo(0, -140);
+            can.closePath();
+            can.stroke();
+            can.restore();
 
-[Link](url) and ![Image](src)
-```
+            can.save();
+            can.strokeStyle='#fff';
+            can.lineWidth='5';
+            can.lineJoin='round';
+            can.translate(250, 250);
+            can.rotate(minute*6*Math.PI/180);
+            can.beginPath();
+            can.moveTo(0, 20);
+            can.lineTo(0, -160);
+            can.closePath();
+            can.stroke();
+            can.restore();
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+            can.save();
+            can.strokeStyle='red';
+            can.lineWidth='3';
+            can.lineJoin='round';
+            can.translate(250, 250);
+            can.rotate(second*6*Math.PI/180);
+            can.beginPath();
+            can.moveTo(0, 30);
+            can.lineTo(0, -175);
+            can.closePath();
+            can.stroke();
+            can.strokeStyle='red';
+            can.fillStyle='#fff';
+            can.lineWidth='5';
+            can.beginPath();
+            can.arc(0,-150,3,0,360,false);
+            can.closePath();
+            can.stroke();
+            can.fill();
+            can.restore();
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Lmonker/Lmonker.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+            can.save();
+            can.strokeStyle='red';
+            can.fillStyle='#000';
+            can.lineWidth='5';
+            can.beginPath();
+            can.arc(250,250,4,0,360,false);
+            can.closePath();
+            can.stroke();
+            can.fill();
+            can.restore();
 
-### Support or Contact
+        }
+        click();
+        setInterval(click,1000);
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+
+    //清除圆形区域图形函数
+    function clearArcFun(x,y,r,cxt){    //(x,y)为要清除的圆的圆心，r为半径，cxt为context
+        var stepClear=1;//别忘记这一步  
+        clearArc(x,y,r);
+        function clearArc(x,y,radius){
+            var calcWidth=radius-stepClear;  
+            var calcHeight=Math.sqrt(radius*radius-calcWidth*calcWidth);  
+
+            var posX=x-calcWidth;  
+            var posY=y-calcHeight;  
+                              
+            var widthX=2*calcWidth;  
+            var heightY=2*calcHeight;  
+                              
+            if(stepClear<=radius){  
+                cxt.clearRect(posX,posY,widthX,heightY);  
+                stepClear+=1;  
+                clearArc(x,y,radius);  
+        }  
+    }  
+}
+    </script>
+    </body>
+</html>
