@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="Keywords" content="小风扇"><!-- 关键字 -->
+        <meta name="Description" content="html+css+css3+js做小风扇"><!--描述-->
+        <style type="text/css" media="screen">
+        body{background-color: #000;}
+            .area{
+                width:800px;
+                height:800px;
+                border:2px solid #000;
+                margin:0px auto;/*将其水平居中*/
+                position:relative;
+            }/*定义外框属性*/
+            .cycle{
+                width:290px;
+                height:290px;
+                border:2px solid blue;
+                border-radius:50%;
+                position:absolute;
+                margin:30px 0px 0px 240px;
+                transition:all 1s;
+                z-index:2;
+                background:#fff;
+                /*transition: all 1s;*/
+
+            }
+
+            .rotate{
+                animation:rotate 1s linear infinite;
+            }/*调用动画关键帧 Css3*/
+            .rotate_1{
+                animation:rotate 0.8s linear infinite;
+            }
+            .rotate_2{
+                animation:rotate 0.5s linear infinite;
+            }
+            .rotate_3{
+                animation:rotate 0.1s linear infinite;
+            }
+            .fan_1{
+                width:0px;
+                height:0px;
+                border:200px solid red;
+                border-top-color:orange;
+                border-bottom-color:transparent;
+                border-left-color:orange;
+                border-right-color:transparent;
+                border-width:70px;
+                margin-left:77px;
+                margin-top:18px;
+                position:absolute;
+                border-radius:50%;
+                transform:rotate(-45deg);
+            }
+            .fan_2{
+                width:0px;
+                height:0px;
+                border:200px solid red;
+                border-top-color:transparent;
+                border-bottom-color:orange;
+                border-left-color:transparent;
+                border-right-color:orange;
+                border-width:70px;
+                margin-left:135px;
+                margin-top:77px;
+                position:absolute;
+                border-radius:50%;
+                transform:rotate(-135deg);
+
+            }
+            .fan_3{
+                width:0px;
+                height:0px;
+                border:200px solid red;
+                border-top-color:transparent;
+                border-bottom-color:orange;
+                border-left-color:orange;
+                border-right-color:transparent;
+                border-width:70px;
+                margin-left:10px;
+                margin-top:77px;
+                position:absolute;
+                border-radius:50%;
+                transform:rotate(-45deg);
+
+
+            }
+            .fan_4{
+                width:0px;
+                height:0px;
+                border:200px solid red;
+                border-top-color:transparent;
+                border-bottom-color:orange;
+                border-left-color:transparent;
+                border-right-color:orange;
+                border-width:70px;
+                margin-left:77px;
+                margin-top:135px;
+                position:absolute;
+                border-radius:50%;
+                transform:rotate(-45deg);
+
+
+            }
+            .center{
+                width:20px;
+                height:20px;
+                background-color: yellow;
+                border-radius: 50%;
+                position:absolute;
+                margin-top: 135px;
+                margin-left: 135px;
+                z-index: 1;
+            }
+            .gan{
+                width:45px;
+                height:450px;
+                border:2px solid blue;
+                position:absolute;
+                top:147px;
+                left:372px;
+                background:#ff9933;
+                padding-top:150px;
+            }
+            .gan ul li{
+                list-style:none;
+                width:45px;
+                height:45px;
+                text-align:center;
+                line-height:45px;
+                margin-top:50px;
+                margin-bottom:-33px;
+                margin-left:-41px;
+                background:#fff;
+                font-weight:bold;
+                font-size:18px;
+                cursor:pointer;
+                border-radius: 50%;
+            }
+            .gan ul li:hover{
+                background-color: yellow;
+            }
+            .cycle:hover{
+                transform:rotate(360deg);
+            }
+            
+
+            @keyframes rotate{
+                from{transform:rotate(0deg)}/*开始*/
+                to{transform:rotate(360deg)}
+                }/*结束*/;
+            
+        </style>
+    </head>
+    <body>
+    <h3>点击按钮控制它</h3>
+    <div class="area">
+        <div class="cycle">
+            <div class="fan_1"></div>
+            <div class="fan_2"></div>
+            <div class="fan_3"></div>
+            <div class="fan_4"></div>
+            <div class="center"></div>
+        </div>
+        <div class="gan">
+        <ul>
+            <li>on</li>
+            <li>off</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul> 
+        </div>
+    </div>
+    <!--引入外部Jquery类库文件-->
+        <script type="text/javascript" src="jquery-1.12.3.js"></script>
+        <script>
+            /*测试该脚本文件是否生效*/
+            //console.log($); 当该串代码解析陈功 说明咱们脚本引用成功
+            //获取相应的电风扇按钮
+            /*
+                jquery-1.12.3.j为类库（API），是由原生Js进行封装的
+                $("");:在Js中通过行为查找网页文档元素
+                $是JS里面选择器 该文档中查找元素
+                ("元素名、id、class、群组混合");
+                .click();Jquery中 鼠标点击动作/事件
+                function()：方法构造
+                点击添加/修改/删除 /循环/一般都写在function方法构造中
+            */
+            var _index = 0;
+            /*
+                var 是Js中关键字，用来声明某个对象/创建对象 方便后期调用
+                _index 变量名/对象名字 自定义
+                = 赋值 把等号右边值赋值给左边 右边值数据类型（字符串、数字）
+            */
+            $(".gan ul li").click(function(){
+                //console.log("同学们你们是最棒最优秀的");
+                _index = $(this).index();//获取当前li序列号
+                /*
+                    this:当前 .index()获取序列号函数
+                */
+                //console.log(_index)
+                /*
+                    if：判断
+                    ()：条件判断 
+                    _index==5:当按钮索引等于5的时候，
+                    通过addClass添加类名函数动态添加一个自定义旋转动画样式
+                */
+                if(_index==0){
+                    $(".cycle").addClass("rotate");
+                    console.log("凡事");
+                }
+                /*
+                    _index==4:当按钮索引等于5的时候，
+                    通过addClass添加类名函数动态移除一个自定义旋转动画样式
+                */
+                if(_index==1){
+                    $(".cycle").removeClass("rotate rotate_1 rotate_2 rotate_3");
+                }
+                if(_index==2){
+                    $(".cycle").addClass("rotate_1");
+                }
+                if(_index==3){
+                    $(".cycle").addClass("rotate_2");
+                }
+                if(_index==4){
+                    $(".cycle").addClass("rotate_3");
+                }
+            });
+        </script>
+    </body>
+</html>
