@@ -1,0 +1,20 @@
+/* 
+* @Author: anchen
+* @Date:   2019-07-19 22:09:20
+* @Last Modified by:   anchen
+* @Last Modified time: 2019-07-21 17:19:32
+*/
+*{margin:0;padding:0;}
+li{list-style: none;}
+html{height:100%;}
+body{height:100%;perspective:800px;/*景深*/overflow:hidden;}
+#wrap{width:100%;height:100%;position:absolute;background:url('../img/bg.png') #023b3b no-repeat center;}
+#main{position:absolute;top:50%;left:50%; transform:translateZ(-3000px) rotateX(0deg) rotateY(0deg);transform-style: preserve-3d;/*变换风格*/}
+#main li{width:120px;height:160px;background:rgba(0,127,127,0.5);border:1px solid rgba(127,255,255,0.25);box-shadow:0 0 12px rgba(0,255,255,0.5);position:absolute;top:-80px;left:-60px;cursor:pointer;transform:translateZ(0px);transition:3s ease-in-out;color:rgba(255,255,255,0.5);font-size: 80px;font-family: '微软雅黑';text-align: center;text-shadow: 0 0 12px #fff;}
+#main li:hover{box-shadow:0 0 12px rgba(0,255,255,0.75);border:1px solid rgba(127,255,255,0.75);}
+#btn li,#bttn{width:50px;height:30px;margin:10px;background:rgba(0,127,127,0.5);border:1px solid rgba(127,255,255,0.25);box-shadow:0 0 2px rgba(0,255,255,0.5);color:#fff;text-align: center;border-radius: 3px;line-height: 30px;float:left;cursor:pointer;text-shadow: 0 0 12px #fff;}
+#btn li:hover{background:rgba(0,127,127,0.9);}
+#btn li:active{color:#000;}
+#lij{clear: both;top:90%;left:90%;position:absolute;}
+#win{width:80%;height:80%;background:rgba(0,127,127,0.25);border-radius: 5px;top:10%;left:10%;display: none;position:absolute;transform:scale(0.8);}
+#win #close{width:50px;height:30px;background:rgba(0,127,127,0.8);border:1px solid rgba(127,255,255,0.25);box-shadow:0 0 2px rgba(0,255,255,0.5);cursor:pointer;position:absolute;top:0;right: 0;border-bottom-left-radius:5px;color:rgb(255,255,255);font-size: 14px;font-family: '微软雅黑';text-align: center;line-height: 30px;text-shadow: 0 0 12px #fff;}
