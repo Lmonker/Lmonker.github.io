@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>随笔</title>
+        <meta charset="utf-8">
+        <style type="text/css" media="screen">
+            *{margin:0;padding:0;}
+            body{background:#ccc;}
+            a{text-decoration:none;}
+            div{font-family: '微软雅黑';cursor:default;}
+            li{list-style: none;}
+            #welcome{width:100%;height:80px;background:#332541;text-align: center;line-height: 80px;color:#3aa;font-size: 40px;font-family: '楷书';text-shadow:2px 0  0px #fff,4px 0  0px #fff,6px 0  0px #3aa;font-style: oblique;position:relative;box-shadow: 0 2px 5px #333;position:fixed;}
+            #p{box-shadow: 0 0 100px #fff;width:300px;display:inline-block;}
+            /*h3{display:inline-block;}*/
+            .text{width:70%;height:auto;margin:100px 15%;background:#fff;box-shadow: 0 0 3px #333;position:absolute;z-index: -1;}
+            .text h3:hover{color:#32a;}
+            h3{transition:0.5s;border-bottom:1px dotted #000;}
+            .text h3,.text p{padding:15px 100px;font-size: 14px;}
+            canvas{position:fixed;z-index: 100;transition:1s;}
+            #toTop{position:fixed;width:40px;height:70px;background:#fff;left:85%;bottom:150px;}
+            #toTop ul li{height:35px;border-bottom: 1px solid #000;color:#000;text-align: center;line-height: 35px;cursor:pointer;transition:0.5s;}
+            #toTop ul li a:hover{color:#af0;}
+            #nav ul li{float:left;padding:30px 30px;}
+            #nav ul li a:hover{color:#3f4;}
+        </style>
+    </head>
+    <body>
+    <canvas id="can" width="300px" height="80px"></canvas>
+    <div id='top'></div>
+    <div id='welcome'>
+    
+    <p id="p">前端杂记</p>
+    </div>
+    <div class="text">
+    <div id="nav">
+        <ul>
+            <li><a href='index.html' target='_blank'>首页</a></li>
+            <li>其他杂记</li>
+        </ul>    
+    </div>
+    <h3 style="margin-top:80px">css重置样式表reset.css</h3>
+    <p>body, h1, h2, h3, h4, h5, h6, hr, p, blockquote,/* structural elements 结构元素 */<br>
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */<br>
+pre, /* text formatting elements 文本格式元素 */<br>
+fieldset, lengend, button, input, textarea, /* form elements 表单元素 */<br>
+th, td { /* table elements 表格元素 */<br>
+    margin: 0;<br>
+    padding: 0;<br>
+}<br>
+/* 设置默认字体 */<br>
+body,<br>
+button, input, select, textarea { /* for ie */<br>
+    /*font: 12px/1 Tahoma, Helvetica, Arial, "宋体", sans-serif;*/<br>
+    font: 12px/1 Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif; /* 用 ascii 字符表示，使得在任何编码下都无问题 */<br>
+}<br>
+ <br>
+h1 { font-size: 18px; /* 18px / 12px = 1.5 */ }<br>
+h2 { font-size: 16px; }<br>
+h3 { font-size: 14px; }<br>
+h4, h5, h6 { font-size: 100%; }<br>
+ <br>
+address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */<br>
+code, kbd, pre, samp, tt { font-family: "Courier New", Courier, monospace; } /* 统一等宽字体 */<br>
+small { font-size: 12px; } /* 小于 12px 的中文很难阅读，让 small 正常化 */<br>
+ <br>
+/* 重置列表元素 */<br>
+ul, ol { list-style: none; }<br>
+ <br>
+/* 重置文本格式元素 */<br>
+a { text-decoration: none; }<br>
+a:hover { text-decoration: underline; }<br>
+ <br>
+abbr[title], acronym[title] { /* 注：1.ie6 不支持 abbr; 2.这里用了属性选择符，ie6 下无效果 */<br>
+    border-bottom: 1px dotted;<br>
+    cursor: help;<br>
+}<br>
+ <br>
+q:before, q:after { content: ''; }<br>
+ <br>
+/* 重置表单元素 */<br>
+legend { color: #000; } /* for ie6 */<br>
+fieldset, img { border: none; } /* img 搭车：让链接里的 img 无边框 */<br>
+/* 注：optgroup 无法扶正 */<br>
+button, input, select, textarea {<br>
+    font-size: 100%; /* 使得表单元素在 ie 下能继承字体大小 */<br>
+}<br>
+ <br>
+/* 重置表格元素 */<br>
+table {<br>
+    border-collapse: collapse;<br>
+    border-spacing: 0;<br>
+}<br>
+ <br>
+/* 重置 hr */<br>
+hr {<br>
+    border: none;<br>
+    height: 1px;<br>
+}<br>
+ <br>
+/* 让非ie浏览器默认也显示垂直滚动条，防止因滚动条引起的闪烁 */<br>
+html { overflow-y: scroll; }</p>
+</div>
+
+<div id="toTop">
+<ul id="ul1">
+    <li><a href='#top'>top</a></li>
+    <li>赞</li>
+</ul>
+    
+</div>
+    <script>
+           var p=document.getElementById('p');
+           var li=document.getElementById('ul1').getElementsByTagName('li');
+           li[0].onclick=function(){
+
+           }
+           var can=document.getElementById('can')
+           var cxt=can.getContext("2d");
+
+
+
+           function a(){
+                var random1=Math.random()*280+10;
+                var random2=Math.random()*60+10;
+                cxt.fillStyle = "#eeeeef";
+            
+            for(var i= 0; i <= 4; i++){
+                cxt.beginPath();
+                cxt.arc(random1,random2,i*2,0,2*Math.PI);
+                cxt.closePath();
+                cxt.fillStyle = "rgba(255,255,255,0.25)";
+                cxt.fill();
+            }
+                
+
+
+           }
+           timer=setInterval(a,2000);
+           setTimeout(function(){
+            clearInterval(timer)
+            can.style.marginTop=800+'px';
+            setTimeout(function(){
+                cxt.clearRect(0,0,300,300);
+            },1000)
+            
+           },30000)
+           
+    </script>
+    </body>
+</html>
