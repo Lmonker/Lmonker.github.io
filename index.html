@@ -35,7 +35,9 @@
             nav p{display:block; width:40px;height:40px;border-radius:50%; position:absolute;margin-left:-20px; margin-top:-40px; color:#ccc;background:rgba(255,255,0,.5);font-size:14px;text-align: center;line-height:40px;cursor:pointer;}
             nav p:hover{color:#fff;}
             nav:hover{transform:scale(1) rotate(0deg); opacity:1;}
-
+            #tanchuang{width:80%;height:80%;background:rgba(0,0,0,.8);position:fixed;top:10%;left:10%;transform:scale(0) rotateY(180deg);transition:0.8s;opacity:0;}
+            #fanhui{width:40px;height:25px;color:#ccc;position:absolute;text-align:center;line-height:25px;right:0;top:0;cursor:pointer;border-bottom:1px solid #ccc;border-left:1px solid #ccc;border-radius:5px;border-top-right-radius:0px;}
+            #fanhui:hover{color:#fff;background:#f00;}
         </style>
         <script src="js/jquery-1.12.1.min.js" type="text/javascript"></script>
         <script src="js/jquery.mousewheel.js" type="text/javascript"></script>
@@ -104,7 +106,9 @@
         <p><</p>
             
         </div>
-        
+        <div id="tanchuang">
+        <div id="fanhui">X</div>
+        </div>
         <script src="js/warp.js"></script>
         <script>
             var oLi=document.getElementById('ul1').getElementsByTagName('li');
@@ -117,8 +121,17 @@
             for(var i=0, l=14; i<4; i++){
                 me[i].style.top=(60 - 35*Math.cos(-0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4)+"%";
                 me[i].style.left=(50 + 35*Math.sin(-0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4) +"%";
+                me[i].onclick=function(){
+                    tc.style.transform='scale(1) rotateY(0deg)';
+                    tc.style.opacity='1';
+                }
             }
-
+            var fh=document.getElementById('fanhui');
+            var tc=document.getElementById('tanchuang')
+                fh.onclick=function(){
+                    tc.style.transform='scale(0) rotateY(180deg)';
+                    tc.style.opacity='0';
+                }
             oLi[i].onmouseenter=function(){
                 oTwo.style.display='block';
                 index=this.index;
