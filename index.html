@@ -111,12 +111,6 @@
         </div>
         <script src="js/warp.js"></script>
         <script>
-            var oLi=document.getElementById('ul1').getElementsByTagName('li');
-            var oTwo=document.getElementById('two');
-            var ull1=document.getElementById('ull1');
-            var index=0;
-            for(var i=1;i<oLi.length;i++){
-                oLi[i].index=i;
             var me = document.querySelectorAll('.me');
             for(var i=0, l=14; i<4; i++){
                 me[i].style.top=(60 - 35*Math.cos(-0.5 * Math.PI - 2*(1/l)*i*Math.PI)).toFixed(4)+"%";
@@ -132,6 +126,12 @@
                     tc.style.transform='scale(0) rotateY(180deg)';
                     tc.style.opacity='0';
                 }
+            var oLi=document.getElementById('ul1').getElementsByTagName('li');
+            var oTwo=document.getElementById('two');
+            var ull1=document.getElementById('ull1');
+            var index=0;
+            for(var i=1;i<oLi.length;i++){
+                oLi[i].index=i;
             oLi[i].onmouseenter=function(){
                 oTwo.style.display='block';
                 index=this.index;
