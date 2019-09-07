@@ -24,6 +24,13 @@
             #two ul li a:hover{text-decoration: underline;color:#0ff;}
             #nav #ul2 li{float:right;color:#ccc;width:40px;height:40px;line-height:40px;text-align: center;margin-top:10px;margin-right: 30px;cursor:pointer;}
             #nav #ul2 li:hover{color:#fff;text-shadow:0 0 5px #fff;box-shadow:0 0 15px #a0f;}
+            #huadong{width:200px;height:100px;position:fixed;bottom:10px;right:5%;transform:rotate(-90deg);font-size:100px;text-align: center;line-height:100px;color:#fff;transition:1s;}
+            @keyframes huadong{
+                0%{opacity:0.5;transform:scale(0.8);margin-right:20px;}
+                50%{opacity:0.8;transform:scale(1.2);margin-right:40px;}
+                100%{opacity:0.5;transform:scale(0.8);margin-right:20px;}
+            }
+            #huadong p{animation:huadong 2s infinite linear;}
             
 
         </style>
@@ -80,6 +87,10 @@
             <li id="li3" style="background:url('img/left3.jpg') no-repeat;top:600px;opacity:0.3"><p>JavaScript</p></li>
             <li id="li4" style="background:url('img/left4.jpg') no-repeat;top:600px;opacity:0.3"><p>jQuery</p></li>
         </ul>
+            
+        </div>
+        <div id="huadong">
+        <p><</p>
             
         </div>
         
