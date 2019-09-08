@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>视频播放器小案例</title>
+        <style type="text/css" media="screen">
+        *{margin:0px;padding:0px;}
+            #box{width:500px;height:300px;margin:100px auto;border:1px solid #f00;position:relative;}
+            
+           
+            #div1{width:500px;height:1px;background:rgba(255,255,255.5);position:relative;margin-bottom: 10px;}
+            #div2{width:0px;height:1px;background:#0ff;}
+            #div3{width:3px;height:3px;border-radius: 50%;border:2px solid #fff;background:#0ff;position:absolute;top:-3px;left:0px;box-shadow: 0 0 5px #fff;}
+            #div3:hover{width:5px;height:5px;top:-4px;}
+            #div4{width:3px;height:3px;top:-3px;}
+            #div4:hover{width:5px;height:5px;}
+            #speed{position:absolute;border-radius:8px;border:1px solid #fff;color:#fff;font-size: 10px;font-family: '微软雅黑';line-height: 15px;text-align: center;width:25px;height:15px;cursor: pointer;top:20px;left:300px;}
+            #bottom{position:absolute;width:500px;display:none;bottom:0px;transition:2s;background:rgba(0,0,0,.5);cursor:default;}
+            #top{background:rgba(0,0,0,.5);text-align:center;line-height:40px;color:#fff;font-size: 14px;font-family: '微软雅黑';width:500px;height:40px;position:absolute;top:0;}
+            #middle{background:rgba(0,0,0,.5);text-align:center;line-height:215px;color:#fff;font-size: 20px;font-family: '微软雅黑';opacity: 0;transition:1s;}
+            .img1{margin-left: 10px;}
+            .img{width:25px;height:25px;}
+            img{cursor: pointer;}
+            p{display:inline-block;color:rgba(255,255,255,.6);font-size: 12px;font-family:'微软雅黑';}
+        </style>
+    </head>
+    <body style="background:#000" onselectstart='return false'>
+    <div id='box'>
+        <video width='500px' height='300px' src='https://vd2.bdstatic.com/mda-jhrw364qcy3cmhae/sc/mda-jhrw364qcy3cmhae.mp4?auth_key=1567925120-0-0-8d3e7253f45bea5b36147003534b8fdf&bcevod_channel=searchbox_feed&abtest=all' poster='img/bg.jpg' id="vid">
+            <source src="/media/video.oga">
+            <source src="/media/video.m4v">
+            您的浏览器不支持video标签，请您更换浏览器！
+        </video>
+        <div id='top'>
+            科技中国
+        </div>
+        <div id="middle" style="width:500px;height:218px;position:absolute;top:40px;">
+            休息一下，点击继续！
+        </div>
+        <div id="bottom">
+        <div id='div1'>
+            <div id="div2"></div>
+            <div id="div3"></div>
+        </div>
+        <img src="img/begin1.png" alt="" class="img img1" title='点击播放'>
+        <img src="img/next4.png" alt="" width="15px" height="15px" class="img1" title="上一个" id="last">
+        <img src="img/next3.png" alt="" width="15px" height="15px" title="下一个" id="next">
+        <p style='margin-left:10px'>00:00:00</p>
+        <p>/00:00:00</p>
+        <div id="speed">倍速</div>
+        <img src="img/1_WPS.png" alt="" width="20px" height="20px" style='margin-left:130px' title="静音">
+        <div id="volume" style="width:80px;height:2px;background:#fff;border-radius:3px;display:inline-block;position:absolute;margin-top:15px">
+            <div id='div4' style="background:#0ff;border-radius: 50%;position:absolute;left:80px;box-shadow: 0 0 5px #fff;border:2px solid #fff;">
+            </div>
+        </div>
+        <div id="div5" title='全屏' style='width:20px;height:15px;border-radius:5px;border:1px solid #fff;display:inline-block;position:absolute;right:12px;top:20px;'>
+        </div>
+        </div>
+    </div>
+    <script>
+        var img=document.getElementsByTagName('img');
+        var middle=document.getElementById('middle');
+        var vid=document.getElementById('vid');
+        var p=document.getElementsByTagName('p');
+        var div2=document.getElementById('div2');
+        var div3=document.getElementById('div3');
+        var div4=document.getElementById('div4');
+        var div5=document.getElementById('div5');
+        var bottom=document.getElementById('bottom');
+        var top=document.getElementById('top');
+        var speed=document.getElementById('speed');
+        var next=document.getElementById('next');
+        var last=document.getElementById('last');
+        var play=true;
+        var allTime=0;
+        var sportTime=0;
+        set();
+        function set(){setTimeout(function(){
+            allTime=vid.duration;
+            var h=num(Math.floor(allTime/3600));
+            var m=num(Math.floor(allTime/60));
+            var s=num(Math.floor(allTime%60));
+            p[1].innerHTML='/'+h+':'+m+':'+s;
+        },1000)
+    }
+
+        function num(num){
+                if(num<10){
+                    return '0'+num;
+                }else{
+                    return num;
+                }
+        }
+
+        
+            function a(){
+            sportTime=vid.currentTime;
+            var h=num(Math.floor(sportTime/3600));
+            var m=num(Math.floor(sportTime/60));
+            var s=num(Math.floor(sportTime%60));
+            p[0].innerHTML=h+':'+m+':'+s;
+
+        }
+
+        function b(){
+            var bili=sportTime/allTime;
+            var w=495*bili;
+            div2.style.width=w+'px';
+            div3.style.left=w+'px';
+            if(sportTime>=allTime){
+                    clearInterval(img[0].timer);
+                    clearInterval(img[0].timer1);
+                    div2.style.width=0;
+                    div3.style.left=0;
+                    img[0].src='img/begin1.png';
+                    play=true;
+                }
+        }
+
+        img[0].onclick=function c(){
+            if(play){
+                play=false;
+                vid.play();
+                this.src='img/11.png';
+                this.title='点击暂停';
+                this.timer=setInterval(a,1000);
+                this.timer1=setInterval(b,50);
+                middle.style.opacity=0;
+            }else{
+                play=true;
+                vid.pause();
+                this.src='img/begin1.png';
+                clearInterval(this.timer);
+                clearInterval(this.timer1);
+                clearInterval(middle.timer);
+                clearInterval(middle.timer1);
+                clearInterval(window.timer);
+                clearInterval(window.timer1);
+                middle.style.opacity=1;
+            }
+        }
+        middle.onclick=function(){
+            if(play){
+                play=false;
+                vid.play();
+                img[0].src='img/11.png';
+                img[0].title='点击暂停';
+                this.timer=setInterval(a,1000);
+                this.timer1=setInterval(b,13);
+                this.style.opacity=0;
+            }else{
+                play=true;
+                vid.pause();
+                img[0].src='img/begin1.png';
+                clearInterval(this.timer);
+                clearInterval(this.timer1);
+                clearInterval(img[0].timer);
+                clearInterval(img[0].timer1);
+                clearInterval(window.timer);
+                clearInterval(window.timer1);
+                this.style.opacity=1;
+            }
+        }
+            //点击喇叭静音/取消返回原值；
+            var k=true;
+            if(vid.volume=1){
+                var v=1;
+                var vL=div4.style.left;
+            }else{
+            var v=0;
+            var vL=0;
+        }
+            img[3].onclick=function(){
+                if(k){
+                    vid.volume=0;
+                    this.src='img/3.png';
+                    div4.style.left=0;
+                    k=false;
+                }else{
+                    vid.volume=v;
+                    this.src='img/1_WPS.png';
+                    div4.style.left=vL;
+                    k=true;
+                }
+        //     if(vid.volu
+        //     me>0){
+        //         vid.volume=0;
+        //     }else{
+        //     vid.volume=1;
+        // }
+        }
+
+        /*for(var i=0;i<3;i++){
+            img[i].onmouseenter=function(){
+                this.src='img/begin_blue1.png';
+                this.onmouseleave=function(){
+                this.src='img/begin1.png';
+            }
+            }
+            
+        }*/
+
+        box.onmouseover=function(){
+            bottom.style.display='block';
+            this.onmouseleave=function(){
+                setTimeout(function(){
+                    bottom.style.display='none';
+                },2000)
+            }
+        }
+
+        //拉动音量条调节音量
+        div4.onmousedown=d;
+        function d(ev){
+            var ev=ev||window.event;
+            var x = ev.clientX - div4.offsetLeft;
+            // this.style.width=10+'px';
+            // this.style.height=10+'px';
+            document.onmousemove=function(ev){
+                var ev=ev||window.event;
+                var _left = ev.clientX - x;
+                if(_left<0){
+                    _left=0;
+                    img[3].src='img/3.png';
+                }else if(_left>80){
+                    _left=80;
+                }else{
+                    img[3].src='img/1_WPS.png';
+                    _left=_left;
+                }
+                div4.style.left = _left+'px';
+                vid.volume=_left/80*1;
+                v=vid.volume;
+                vL=div4.style.left;
+            }
+        }
+        document.onmouseup=function(){
+            clearInterval(div3.timer)
+            this.onmousemove=null;
+            // div4.style.width=8+'px';
+            // div4.style.height=8+'px';
+            // div3.style.width=5+'px';
+            // div3.style.height=5+'px';
+        }
+        //拉动进度条调节进度
+        div3.onmousedown=e;
+        function e(ev){
+            !play?vid.play():vid.pause();
+            var ev=ev||window.event;
+            this.timer=setInterval(a,1000);
+            var x = ev.clientX - div3.offsetLeft;
+            // this.style.width=8+'px';
+            // this.style.height=8+'px';
+            document.onmousemove=function(ev){
+                var ev=ev||window.event;
+                var _left = ev.clientX - x;
+                if(_left<0){
+                    _left=0;
+                }else if(_left>495){
+                    _left=495;
+                }
+                div2.style.width=_left+'px';
+                div3.style.left = _left+'px';
+                vid.currentTime=_left/500*allTime;
+            }
+        }
+
+
+        //全屏
+        div5.onclick = function(){
+            toFullVideo();
+        }
+
+        //双击全屏
+        box.ondblclick=function(){
+            toFullVideo();
+        }
+        //全屏兼容函数
+        function toFullVideo(){
+
+            if(vid.requestFullscreen){
+
+                return vid.requestFullscreen();
+
+            }else if(vid.webkitRequestFullScreen){
+
+                return vid.webkitRequestFullScreen();
+
+            }else if(vid.mozRequestFullScreen){
+
+                return vid.mozRequestFullScreen();
+
+            }else{
+
+                return vid.msRequestFullscreen();
+
+            }
+        }
+
+        //键盘控制
+        document.onkeydown=function(ev){
+            var ev = ev||window.event;
+            var key=ev.keyCode;
+            switch(key){
+                case 32:
+                c();
+                break;
+                case 38:
+                s();
+                break;
+                case 40:
+                j();
+                break;
+            }
+        }
+
+        function c(){
+            if(play){
+                play=false;
+                vid.play();
+                img[0].src='img/11.png';
+                img[0].title='点击暂停';
+                this.timer=setInterval(a,1000);
+                this.timer1=setInterval(b,50);
+                middle.style.opacity=0;
+            }else{
+                play=true;
+                vid.pause();
+                img[0].src='img/begin1.png';
+                clearInterval(this.timer);
+                clearInterval(this.timer1);
+                clearInterval(middle.timer);
+                clearInterval(middle.timer1);
+                clearInterval(img[0].timer);
+                clearInterval(img[0].timer1);
+                middle.style.opacity=1;
+            }
+        }
+
+        function s(){
+            img[3].src='img/1_WPS.png';
+            if(vid.volume>0.9){
+            vid.volume=1;
+            }else{vid.volume += 0.05;
+                var lX=vid.volume*80;
+                div4.style.left = lX+'px';
+            }
+
+        }
+        function j(){
+            if(vid.volume<0.1){
+            vid.volume =0;
+            div4.style.left=0;
+            img[3].src='img/3.png';
+            }else{vid.volume -= 0.05;
+                var lX=vid.volume*80;
+                div4.style.left = lX+'px';
+            }
+        }
+
+        //倍速 未完善
+        speed.onclick=function(){
+            this.timer=setInterval(function(){
+                st=vid.currentTime;
+                stt= st + 0.5;
+                vid.currentTime=stt;
+            },300)
+            if(vid.ended){
+                clearInterval(this.timer);
+            }
+        }
+
+        //上一个，下一个
+        next.onclick=function(){
+            vid.src='https://vd2.bdstatic.com/mda-jhkw7wdqzn0ff26p/sc/mda-jhkw7wdqzn0ff26p.mp4?auth_key=1567925223-0-0-edc4874b6f7a0eda835b9e594fbd8a1b&bcevod_channel=searchbox_feed&abtest=all';
+            set();
+            !play?vid.play():vid.pause();
+        }
+        last.onclick=function(){
+            vid.src='https://vd2.bdstatic.com/mda-jhrw364qcy3cmhae/sc/mda-jhrw364qcy3cmhae.mp4?auth_key=1567925120-0-0-8d3e7253f45bea5b36147003534b8fdf&bcevod_channel=searchbox_feed&abtest=all';
+            set();
+            !play?vid.play():vid.pause();
+        }
+    </script>
+    </body>
+</html>
