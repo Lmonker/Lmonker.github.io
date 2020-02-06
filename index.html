@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Welcome</title>
+		<style type="text/css">
+			*{padding: 0;margin: 0;}
+			li{list-style: none;}
+			a{text-decoration: none;color: #fff;}
+			/* body{background-image:url(img/bg2.jpg);background-repeat: no-repeat;background-position: center;} */
+			body{background:url(img/1.jpg)  no-repeat center center;background-size:cover;background-attachment:fixed;transition: 1s;}
+			nav{width: 100%;height: 80px;position: relative;}
+			#ej{transition: .5s;opacity: 0;width: 100px;height: 178px;background: rgba(0,0,0,.5);position: absolute;left: 76%;top:56px;color: #fff;text-align: center;border-bottom-left-radius: 40px;border-bottom-right-radius: 40px;}
+			#ej ul li{padding: 20px 0;cursor: pointer;font-size: 14px;font-family: '微软雅黑';color: #fff;}
+			#ej ul li:hover{background: #FFF100;color: #000;}
+			#ul1{opacity: 0;transition: .5s;}
+			#ej1{transition: .5s;opacity: 0;width: 100px;height: 178px;background: rgba(0,0,0,.5);position: absolute;left: 82%;top:56px;color: #fff;text-align: center;border-bottom-left-radius: 40px;border-bottom-right-radius: 40px;}
+			#ej1 ul li{padding: 20px 0;cursor: pointer;font-size: 14px;font-family: '微软雅黑';}
+			#ej1 ul li:hover{background: #FFF100;color: #000;}
+			#ul2{opacity: 0;transition: .5s;}
+			#ej2{transition: .5s;opacity: 0;width: 100px;height: 178px;background: rgba(0,0,0,.5);position: absolute;left: 88.5%;top:56px;color: #fff;text-align: center;border-bottom-left-radius: 40px;border-bottom-right-radius: 40px;}
+			#ej2 ul li{padding: 20px 0;cursor: pointer;font-size: 14px;font-family: '微软雅黑';}
+			#ej2 ul li:hover{background: #FFF100;color: #000;}
+			#ul3{opacity: 0;transition: .5s;}
+			#ul{width: 330px;height: 80px;margin-left: 75%;}
+			@media screen and (max-width:1280px) {
+				#ul{margin-left: 950px;}
+				#ej{left: 960px;}
+				#ej1{left: 1054px;}
+				#ej2{left: 1150px;}
+			}
+			#ul li{font-size: 18px;font-family: '微软雅黑';color: #fff;float: left;line-height: 80px;margin-left: 40px;cursor: pointer;}
+			/* div.start{width: 30px;height: 30px;background: #FFF100;border-radius: 50%;position: 1105px;top: 25px;}
+			.start:hover{background: #000;color: #FFFFFF;}
+			div.sheng{width: 1px;height: 40px;background: #FFF100;position: fixed;left: 1120px;} */
+			div.left{width: 20px;height: 250px;background: rgba(0,0,0,.5);border-radius: 20px;left:100px;top:150px;position: relative;}
+			div.left_s{width: 20px;height: 50px;background: #fff100;border-radius: 20px;top:0px;position: absolute;transition: 1s;}
+		</style>
+	</head>	
+	<body>
+		<!-- <div id="sheng" class="sheng">
+			
+		</div>
+		<div id="start" class="start">
+			
+		</div> -->
+		<nav>
+			<ul id="ul">
+				<li>Html5</li>
+				<li>Css3</li>
+				<li>JavaScript</li>
+			</ul>
+			<div id="ej">
+				<ul id="ul1">
+					<li><a href='audio.html' target='_blank'>音乐播放界面</a></li>
+					<li><a href='video.html' target='_blank'>视频播放界面</a></a></li>
+					<li style="border-bottom-left-radius: 40px;border-bottom-right-radius: 40px;"><a href='canvas.html' target='_blank'>Canvas时钟</a></li>
+				</ul>
+			</div>
+			<div id="ej1">
+				<ul id="ul2">
+					<li><a href='dh.html' target='_blank'>3D动画特效</a></li>
+					<li>相册1</li>
+					<li style="border-bottom-left-radius: 40px;border-bottom-right-radius: 40px;">相册2</li>
+				</ul>
+			</div>
+			<div id="ej2">
+				<ul id="ul3">
+					<li><a href='plane.html' target='_blank'>飞机大战</a></li>
+					<li><a href='start/taobao.html' target='_blank'>轮播图</a></li>
+					<li style="border-bottom-left-radius: 40px;border-bottom-right-radius: 40px;"><a href='small fan.html' target='_blank'>风扇</a></li>
+				</ul>
+			</div>
+		</nav>
+		<div class="left" id="left">
+			<div class="left_s" id="left_s">
+				
+			</div>
+		</div>
+		<script>
+			var oUli = document.getElementById('ul').getElementsByTagName('li');
+			var oEj = document.getElementById('ej');
+			var oEjul = document.getElementById('ul1');
+			var oEj1 = document.getElementById('ej1');
+			var oEju2 = document.getElementById('ul2');
+			var oEj2 = document.getElementById('ej2');
+			var oEju3 = document.getElementById('ul3');
+			var oleft_s = document.getElementById('left_s');
+			var index = 0;
+			var a = false;
+			var b = true;
+			for(var i=0;i<oUli.length;i++){
+				oUli[i].index = i;
+				oUli[i].onmouseenter = function(){
+					index = this.index;
+					switch(index){
+						case 0:oEj1.style.opacity = oEju2.style.opacity = oEj2.style.opacity = oEju3.style.opacity = '0';
+						oEj.style.opacity = oEjul.style.opacity = '1';
+						break;
+						case 1:oEj.style.opacity = oEjul.style.opacity = oEj2.style.opacity = oEju3.style.opacity = '0';
+						oEj1.style.opacity = oEju2.style.opacity = '1';
+						break;
+						case 2:oEj.style.opacity = oEjul.style.opacity = oEj1.style.opacity = oEju2.style.opacity = '0';
+						oEj2.style.opacity = oEju3.style.opacity = '1';
+						break;
+					}
+				}
+				}
+				oEj.onmouseleave = function(){
+					oEj.style.opacity = oEjul.style.opacity = '0';
+				}
+				oEj1.onmouseleave = function(){
+					oEj1.style.opacity = oEju2.style.opacity = '0';
+				}
+				oEj2.onmouseleave = function(){
+					oEj2.style.opacity = oEju3.style.opacity = '0';
+				}
+				var topValue = 0,t = 1,b = 0,c = true;
+				var timer = setInterval(function(){
+					if(topValue>150){
+						t= -1;
+					}else if(topValue<50){
+						t= 1;
+					}
+						oleft_s.style.top = (topValue+50*t) + 'px';
+						topValue = parseInt(oleft_s.style.top);
+						c?b++:b--;
+						// if(c){b++;}else{b--;}
+						switch(b){
+							case 0:document.body.style.backgroundImage = "url('img/1.jpg')";c=true;
+							break;
+							case 1:document.body.style.backgroundImage = "url('img/4.jpg')";
+							break;
+							case 2:document.body.style.backgroundImage = "url('img/3.jpg')";
+							break;
+							case 3:document.body.style.backgroundImage = "url('img/2.jpg')";
+							break;
+							case 4:document.body.style.backgroundImage = "url('img/5.jpg')";c=false;
+							break;
+						}
+						
+				},2500)
+				
+			</script>
+	</body>
+</html>
