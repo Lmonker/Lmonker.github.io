@@ -1,0 +1,27 @@
+			*{padding: 0;margin: 0;}
+			li{list-style: none;}
+			a{text-decoration: none;color: #fff;}
+			body{background:url(img/21.jpg)  no-repeat center center;background-size:cover;background-attachment:fixed;transition: 1s;}
+			nav{width: 100%;height: 80px;position: relative;}
+			#ej{transition: .5s;opacity: 0;width: 100px;height: 178px;background: rgba(0,0,0,.5);position: absolute;left: 76%;top:56px;color: #fff;text-align: center;border-bottom-left-radius: 40px;border-bottom-right-radius: 40px;}
+			#ej ul li{padding: 20px 0;cursor: pointer;font-size: 14px;font-family: '微软雅黑';color: #fff;}
+			#ej ul li:hover{background: #FFF100;color: #000;}
+			#ul1{opacity: 0;transition: .5s;}
+			#ej1{transition: .5s;opacity: 0;width: 100px;height: 178px;background: rgba(0,0,0,.5);position: absolute;left: 82%;top:56px;color: #fff;text-align: center;border-bottom-left-radius: 40px;border-bottom-right-radius: 40px;}
+			#ej1 ul li{padding: 20px 0;cursor: pointer;font-size: 14px;font-family: '微软雅黑';}
+			#ej1 ul li:hover{background: #FFF100;color: #000;}
+			#ul2{opacity: 0;transition: .5s;}
+			#ej2{transition: .5s;opacity: 0;width: 100px;height: 178px;background: rgba(0,0,0,.5);position: absolute;left: 88.5%;top:56px;color: #fff;text-align: center;border-bottom-left-radius: 40px;border-bottom-right-radius: 40px;}
+			#ej2 ul li{padding: 20px 0;cursor: pointer;font-size: 14px;font-family: '微软雅黑';}
+			#ej2 ul li:hover{background: #FFF100;color: #000;}
+			#ul3{opacity: 0;transition: .5s;}
+			#ul{width: 330px;height: 80px;margin-left: 75%;}
+			/* @media screen and (max-width:1280px) {
+				#ul{margin-left: 950px;}
+				#ej{left: 960px;}
+				#ej1{left: 1054px;}
+				#ej2{left: 1150px;}
+			} */
+			#ul li{font-size: 18px;font-family: '微软雅黑';color: #fff;float: left;line-height: 80px;margin-left: 40px;cursor: pointer;}
+			div.left{width: 20px;height: 250px;background: rgba(0,0,0,.5);border-radius: 20px;left:100px;top:150px;position: relative;}
+			div.left_s{width: 20px;height: 50px;background: #fff100;border-radius: 20px;top:0px;position: absolute;transition: 1s;}
